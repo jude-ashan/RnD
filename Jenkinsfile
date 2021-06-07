@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    def app
 
     stages {
         stage('Verify Branch') {
@@ -7,13 +8,12 @@ pipeline {
                 echo "$GIT_BRANCH"
             }
         }
-        stage('Docker Build') {
+        stage('Build image') {
             steps {
-                sh(script: 'docker images -a')
                 sh(script: """
                   cd Docker/
                   docker images -a
-                  docker build -t jenkins-pipeline .
+                  app = docker.build(jenkinspipelinestest/0008)
                   docker images -a
                   cd ..
                   """)
@@ -27,17 +27,9 @@ pipeline {
                 }
             }
         }
-        stage('Push Container') {
-            steps {
-                echo "Workspace is $WORKSPACE"
-                dir("$WORKSPACE/Docker") {
-                    script {
-                        docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
-                            def image = docker.build('0008/jenkinspipelinestest:latest')
-                            image.push()
-                        }
-                    }
-                }
+        stage ('Push Docker image to Artifact') {
+            docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
+                app.push('0008/jenkinspipelinestest:latest')
             }
         }
     }
