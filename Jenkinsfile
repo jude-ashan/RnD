@@ -32,7 +32,7 @@ pipeline {
                 echo "Workspace is $WORKSPACE"
                 dir("$WORKSPACE/Docker") {
                     script {
-                        docker.withRegistry('https://hub.docker.com/', 'DockerHub') {
+                        docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
                             def image = docker.build('0008/jenkinspipelinestest:latest')
                             image.push()
                         }
