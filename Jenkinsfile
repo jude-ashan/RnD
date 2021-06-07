@@ -18,13 +18,13 @@ pipeline {
                   cd ..
                   """)
             }
-        }
-        post {
-            success {
-                echo "Docker build is successfull :)"
-            }
-            failure {
-                echo "Docker build is failed :("
+            post {
+                success {
+                    echo "Docker build is successfull :)"
+                }
+                failure {
+                    echo "Docker build is failed :("
+                }
             }
         }
     }
