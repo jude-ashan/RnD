@@ -13,10 +13,18 @@ pipeline {
                 sh(script: """
                   cd Docker/
                   docker images -a
-                  docker build -t jenkins-pipeline .
+                  docker build -t jenkins-pipeline
                   docker images -a
                   cd ..
                   """)
+            }
+        }
+        post {
+            success {
+                echo "Docker build is successfull :)"
+            }
+            failure {
+                echo "Docker build is failed :("
             }
         }
     }
