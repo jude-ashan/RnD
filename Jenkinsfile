@@ -27,5 +27,18 @@ pipeline {
                 }
             }
         }
+        stage('Push Container') {
+            steps {
+                echo "Workspace is $WORKSPACE"
+                dir("$WORKSPACE/Docker") {
+                    script {
+                        docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
+                            def image = docker.build('0008/jenkinspipelinestest:latest')
+                            image.push()
+                        }
+                    }
+                }
+            }
+        }
     }
 }
