@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Greeting') {
+        stage('Verify Branch') {
             steps {
-                sh(script: 'echo Hello World')
+                echo '$GIT_BRANCH'
             }
         }
         stage('Docker Build') {
