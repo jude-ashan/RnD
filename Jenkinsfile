@@ -1,4 +1,4 @@
-pipeline {
+node {
     agent any
     def app
 
@@ -10,14 +10,12 @@ pipeline {
         }
         stage('Build image') {
             steps {
-                sh(script: """
-                  cd Docker/
-                  docker images -a
-                  app = docker.build(jenkinspipelinestest/0008)
-                  docker images -a
-                  cd ..
-                  """)
+                dir('Docker/') {
+                    // some block
+                }
             }
+            app = docker.build("jenkinspipelinestest/0008")
+
             post {
                 success {
                     echo "Docker build is successfull :)"
