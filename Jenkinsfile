@@ -13,7 +13,7 @@ pipeline {
                 sh(script: """
                   cd Docker/
                   docker images -a
-                  docker build -t jenkins-pipeline
+                  docker build -t jenkins-pipeline .
                   docker images -a
                   cd ..
                   """)
