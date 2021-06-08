@@ -32,23 +32,23 @@ pipeline {
                 sh (script: 'docker image tag jenkins-pipeline:latest 0008/jenkins-pipeline:1')
             }
         }
-        stage('Docker Push') {
-            steps {
-                sh(script: 'docker image push --all-tags 0008/jenkins-pipeline', 'DockerHub')
-            }
-        }
-//        stage('Push Container') {
+//        stage('Docker Push') {
 //            steps {
-//                echo "Workspace is $WORKSPACE"
-//                dir("$WORKSPACE/Docker") {
-//                    script {
-//                        docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
-//                            def image = docker.build('0008/jenkinspipelinestest:latest')
-//                            image.push()
-//                        }
-//                    }
-//                }
+//                sh(script: 'docker image push --all-tags 0008/jenkins-pipeline')
 //            }
 //        }
+        stage('Push Container') {
+            steps {
+                echo "Workspace is $WORKSPACE"
+                dir("$WORKSPACE/Docker") {
+                    script {
+                        docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
+                            def image = docker.build('0008/jenkinspipelinestest:latest')
+                            image.push()
+                        }
+                    }
+                }
+            }
+        }
     }
 }
