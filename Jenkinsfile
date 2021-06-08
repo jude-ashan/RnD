@@ -32,11 +32,6 @@ pipeline {
                 sh (script: 'docker image tag jenkins-pipeline:latest 0008/jenkins-pipeline:1')
             }
         }
-//        stage('Docker Push') {
-//            steps {
-//                sh(script: 'docker image push --all-tags 0008/jenkins-pipeline')
-//            }
-//        }
         stage('Push Container') {
             steps {
                 echo "Workspace is $WORKSPACE"
