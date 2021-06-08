@@ -34,7 +34,7 @@ pipeline {
         }
         stage('Docker Push') {
             steps {
-                sh(script: 'docker image push --all-tags 0008/jenkins-pipeline')
+                sh(script: 'docker image push --all-tags 0008/jenkins-pipeline', 'DockerHub')
             }
         }
 //        stage('Push Container') {
