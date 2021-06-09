@@ -7,13 +7,15 @@ pipeline {
                 echo "$GIT_BRANCH"
             }
         }
-        stage('Hello World Build') {
-            steps {
-                  sh(script: """
-                  cd src/main/java/com/coveros/demo/helloworld
-                  java -cp helloworld-1.0.jar com.coveros.demo.helloworld.HelloWorld
-                  """)
-            }
+        stage('Clean the build') {
+            sh(script: 'mvn clean package')
+        }
+//        stage('Hello World Build') {
+//            steps {
+//                  sh(script: """
+//                  java -cp helloworld-1.0.jar com.coveros.demo.helloworld.HelloWorld
+//                  """)
+//            }
             post {
                 success {
                     echo "Java build is successfull :)"
