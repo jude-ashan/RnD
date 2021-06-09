@@ -8,7 +8,9 @@ pipeline {
             }
         }
         stage('Clean the build') {
-            sh(script: 'mvn clean package')
+            steps {
+                sh(script: 'mvn clean package')
+            }
         }
 //        stage('Hello World Build') {
 //            steps {
