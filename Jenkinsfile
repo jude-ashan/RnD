@@ -16,3 +16,4 @@ pipeline {
         }
     }
 }
+//To test the pollSCM
