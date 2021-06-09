@@ -16,10 +16,10 @@ pipeline {
         }
         post {
             success {
-                echo "Hello World build is successful at $(date) :)"
+                echo "Hello World build is successful :)"
             }
             failure {
-                echo "Hello World build is failed at $(date) :("
+                echo "Hello World build is failed :("
             }
         }
     }
