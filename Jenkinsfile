@@ -7,43 +7,39 @@ pipeline {
                 echo "$GIT_BRANCH"
             }
         }
-        stage('Docker Build') {
+        stage('Hello World Build') {
             steps {
-                sh(script: 'docker images -a')
-                sh(script: """
-                  cd Docker/
-                  docker images -a
-                  docker build -t jenkins-pipeline .
-                  docker images -a
-                  cd ..
+                  sh(script: """
+                  cd src/main/java/com/coveros/demo/helloworld
+                  java -cp helloworld-1.0.jar com.coveros.demo.helloworld.HelloWorld
                   """)
             }
             post {
                 success {
-                    echo "Docker build is successfull :)"
+                    echo "Java build is successfull :)"
                 }
                 failure {
-                    echo "Docker build is failed :("
+                    echo "Java build is failed :("
                 }
             }
         }
-        stage('Docker Tag') {
-            steps {
-                sh (script: 'docker image tag jenkins-pipeline:latest 0008/jenkins-pipeline:1')
-            }
-        }
-        stage('Push Container') {
-            steps {
-                echo "Workspace is $WORKSPACE"
-                dir("$WORKSPACE/Docker") {
-                    script {
-                        docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
-                            def image = docker.build('0008/jenkinspipelinestest:latest')
-                            image.push()
-                        }
-                    }
-                }
-            }
-        }
+//        stage('Docker Tag') {
+//            steps {
+//                sh (script: 'docker image tag jenkins-pipeline:latest 0008/jenkins-pipeline:1')
+//            }
+//        }
+//        stage('Push Container') {
+//            steps {
+//                echo "Workspace is $WORKSPACE"
+//                dir("$WORKSPACE/Docker") {
+//                    script {
+//                        docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
+//                            def image = docker.build('0008/jenkinspipelinestest:latest')
+//                            image.push()
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 }
