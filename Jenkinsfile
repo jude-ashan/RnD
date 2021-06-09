@@ -14,12 +14,13 @@ pipeline {
                 sh(script: 'mvn clean package')
             }
         }
-        post {
-            success {
-                echo "Hello World build is successful :)"
-            }
-            failure {
-                echo "Hello World build is failed :("
+            post {
+                success {
+                    echo "Hello World build is successful :)"
+                }
+                failure {
+                    echo "Hello World build is failed :("
+                }
             }
         }
     }
