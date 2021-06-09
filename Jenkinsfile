@@ -13,7 +13,6 @@ pipeline {
             steps {
                 sh(script: 'mvn clean package')
             }
-        }
             post {
                 success {
                     echo "Hello World build is successful :)"
