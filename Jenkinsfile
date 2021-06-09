@@ -16,15 +16,16 @@ pipeline {
 //                  java -cp helloworld-1.0.jar com.coveros.demo.helloworld.HelloWorld
 //                  """)
 //            }
-            post {
-                success {
-                    echo "Java build is successfull :)"
-                }
-                failure {
-                    echo "Java build is failed :("
-                }
-            }
-        }
+//            post {
+//                success {
+//                    echo "Java build is successfull :)"
+//                }
+//                failure {
+//                    echo "Java build is failed :("
+//                }
+//            }
+//        }
+
 //        stage('Docker Tag') {
 //            steps {
 //                sh (script: 'docker image tag jenkins-pipeline:latest 0008/jenkins-pipeline:1')
