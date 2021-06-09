@@ -14,6 +14,13 @@ pipeline {
                 sh(script: 'mvn clean package')
             }
         }
+        post {
+            success {
+                echo "Hello World build is successful at $(date) :)"
+            }
+            failure {
+                echo "Hello World build is failed at $(date) :("
+            }
+        }
     }
 }
-//To test the pollSCM
